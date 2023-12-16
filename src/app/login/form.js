@@ -9,7 +9,9 @@ export default function LoginForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         const formData = new FormData(e.currentTarget);
+        console.log(formData.get('username'))
         const response = await signIn('credentials', {
           username: formData.get('username'),
           password: formData.get('password'),
@@ -17,8 +19,8 @@ export default function LoginForm() {
         });
     
         console.log("asdasd", { response });
-        if (!response?.error) {
-          router.push('/');
+        if (!response.error) {
+          router.push('/dd');
           router.refresh();
         }
     }

@@ -6,34 +6,29 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions = {
   session: {
-    strategy: 'jwt'
-  },
-  pages: {
-    signIn: "/login",
+    strategy: 'jwt',
   },
   providers: [
     CredentialsProvider({
-      name: 'credentials',
-
       credentials: {
-        username: { label: 'username', type: 'text' },
-        password: { label: 'password', type: 'password' }
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
       },
 
-      async auth(credentials) {
+      async authorize(credentials, req) {
         console.log('Credentials', credentials)
         if (!credentials.username || !credentials.password) {
           return null
         }
 
-        const user = await prisma.user.findUnique({
+        const user = await prisma.Admin.findUnique({
           where: {
             username: credentials.username
           }
         })
 
         if (!user) {
-          return null
+          return { errors: user.errors, status: false }
         }
 
         const isPasswordValid = await compare(
@@ -42,7 +37,7 @@ export const authOptions = {
         )
 
         if (!isPasswordValid) {
-          return null
+          return { errors: user.errors, status: false }
         }
 
         return {
@@ -54,6 +49,7 @@ export const authOptions = {
       }
     })
   ],
+
   callbacks: {
     session: ({ session, token }) => {
       console.log('Session Callback', { session, token })
@@ -66,6 +62,7 @@ export const authOptions = {
         }
       }
     },
+
     jwt: ({ token, user }) => {
       console.log('JWT Callback', { token, user })
       if (user) {
@@ -78,8 +75,7 @@ export const authOptions = {
       }
       return token
     }
-  },
-  secret: process.env.JWT_SECRET,
+  }
 }
 
 const handler = NextAuth(authOptions)

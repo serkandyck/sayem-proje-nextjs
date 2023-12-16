@@ -1,8 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { getServerSession } from 'next-auth';
+import Logout from '../login/logout';
+import DropdownComp from '../login/dropdowncomp';
 
 
-export default function Header() {
+
+export default async function Header() {
+    const session = await getServerSession()
+
     return (
         <div className="inner">
             <Link  href="/" className="masthead-brand" title="SAYEM">
@@ -15,7 +21,8 @@ export default function Header() {
             </Link>
             <nav className="nav nav-masthead sayem-nav-link justify-content-center">
                 <Link  className="btn sayem-secondary-button" href="/find-request">Talep Sorgulama</Link >
-                <Link  className="btn sayem-primary-button" href="/login">Yetkili Girişi</Link >
+                {!!session && <DropdownComp />}
+                {!session && <Link  className="btn sayem-primary-button" href="/login">Yetkili Girişi</Link >}
             </nav>
         </div>
     )
