@@ -2,7 +2,7 @@
 
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { FormEvent } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function LoginForm() {
     const router = useRouter()
@@ -11,17 +11,18 @@ export default function LoginForm() {
         e.preventDefault();
         
         const formData = new FormData(e.currentTarget);
-        console.log(formData.get('username'))
+
         const response = await signIn('credentials', {
           username: formData.get('username'),
           password: formData.get('password'),
           redirect: false,
         });
-    
-        console.log("asdasd", { response });
+        console.log(response);
         if (!response.error) {
-          router.push('/dd');
+          router.push('/');
           router.refresh();
+        } else {
+            toast.error("Hatalı kullanıcı adı veya şifre.")
         }
     }
     return (

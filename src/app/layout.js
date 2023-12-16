@@ -1,6 +1,8 @@
 
 import "bootstrap/dist/css/bootstrap.css";
 import { Providers } from './providers'
+import { Toaster } from 'react-hot-toast';
+
 
 import './globals.css'
 
@@ -18,6 +20,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <Toaster />
             <header className="masthead mb-auto">
               <Header />
             </header>

@@ -27,6 +27,7 @@ export const authOptions = {
           }
         })
 
+
         if (!user) {
           return { errors: user.errors, status: false }
         }
