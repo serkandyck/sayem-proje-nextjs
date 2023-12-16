@@ -1,9 +1,9 @@
 
-import { Inter } from 'next/font/google'
 import "bootstrap/dist/css/bootstrap.css";
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import Header from './components/header'
+import Footer from './components/footer'
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,8 +12,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="tr">
+      <body className="text-center">
+        <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+          <header className="masthead mb-auto">
+            <Header />
+          </header>
+          
+          <main role="main" className="inner cover">
+            {children}
+          </main>
+          
+          <footer className="mastfoot mt-auto">
+            <Footer />
+          </footer>
+          
+      </div>
+        
+      </body>
     </html>
   )
 }
