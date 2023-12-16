@@ -1,5 +1,7 @@
 
 import "bootstrap/dist/css/bootstrap.css";
+import { Providers } from './providers'
+
 import './globals.css'
 
 import Header from './components/header'
@@ -14,21 +16,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr">
       <body>
-        <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
-          <header className="masthead mb-auto">
-            <Header />
-          </header>
-          
-          <main role="main" className="inner cover">
-            {children}
-          </main>
-          
-          <footer className="mastfoot mt-auto">
-            <Footer />
-          </footer>
-          
-      </div>
-        
+        <Providers>
+          <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header className="masthead mb-auto">
+              <Header />
+            </header>
+            
+            <main role="main" className="inner cover">
+              {children}
+            </main>
+            
+            <footer className="mastfoot mt-auto">
+              <Footer />
+            </footer>
+            
+          </div>
+        </Providers>
       </body>
     </html>
   )

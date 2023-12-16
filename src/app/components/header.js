@@ -15,7 +15,7 @@ export default function Header() {
             </Link>
             <nav className="nav nav-masthead sayem-nav-link justify-content-center">
                 <Link  className="btn sayem-secondary-button" href="/find-request">Talep Sorgulama</Link >
-                <Link  className="btn sayem-primary-button" href="/auth/login">Yetkili Girişi</Link >
+                <Link  className="btn sayem-primary-button" href="/login">Yetkili Girişi</Link >
             </nav>
         </div>
     )

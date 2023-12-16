@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Request {
+  id                Int      @id @default(autoincrement())
+  uuid              String   @unique
+  title             String
+  content           String
+  status            Boolean  @default(false)
+  responses         Response[]
+  requestType       RequestType    @relation(fields: [requestTypeId], references: [id])
+  requestTypeId     Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model RequestType {
+  id          Int    @id @default(autoincrement())
+  name        String
+  requests    Request[]
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement())
+  name        String?
+  username    String   @unique
+  password    String
+  responses   Response[]
+}
+
+model Response {
+  id          Int        @id @default(autoincrement())
+  message     String
+  author      Admin      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  request     Request    @relation(fields: [requestId], references: [id])
+  requestId   Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
