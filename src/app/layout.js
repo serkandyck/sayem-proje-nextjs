@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
-      <body className="text-center">
+      <body>
         <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
           <header className="masthead mb-auto">
             <Header />

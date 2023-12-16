@@ -8,14 +8,14 @@ export default function Header() {
             <Link  href="/" className="masthead-brand" title="SAYEM">
                 <Image
                 src="/img/sayem-logo.png"
-                width={217}
-                height={69}
+                width={220}
+                height={70}
                 className="logo-img" alt="SAYEM"
                 />
             </Link>
             <nav className="nav nav-masthead sayem-nav-link justify-content-center">
                 <Link  className="btn sayem-secondary-button" href="/find-request">Talep Sorgulama</Link >
-                <Link  className="btn sayem-primary-button" href="/login">Yetkili Girişi</Link >
+                <Link  className="btn sayem-primary-button" href="/auth/login">Yetkili Girişi</Link >
             </nav>
         </div>
     )
