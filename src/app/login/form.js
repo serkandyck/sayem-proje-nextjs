@@ -2,9 +2,11 @@
 
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function LoginForm() {
+    const [ error, setError ] = useState(false)
     const router = useRouter()
 
     const handleSubmit = async (e) => {
@@ -17,12 +19,13 @@ export default function LoginForm() {
           password: formData.get('password'),
           redirect: false,
         });
-        console.log(response);
+        
         if (!response.error) {
           router.push('/');
           router.refresh();
         } else {
             toast.error("Hatalı kullanıcı adı veya şifre.")
+            setError(true);
         }
     }
     return (
@@ -33,19 +36,24 @@ export default function LoginForm() {
                         <div className="col-md-12 col-lg-12">
                             <h4 className="mb-3 text-center sayem-title-black">Yetkili Girişi</h4>
                             <form className="needs-validation" onSubmit={handleSubmit}>
+                                <div className={"alert alert-danger " + (error ? 'block': 'hidden')} role="alert">
+                                    Hatalı kullanıcı adı veya şifre.
+                                </div>
+                                <div className={error ? 'block' : 'hidden'}>error state</div>
+                                
                                 <div className="mb-3">
                                     <label className="form-label sayem-title-black">Kullanıcı Adı</label>
-                                    <input name="username" type="text" className="form-control"></input>
+                                    <input name="username" type="text" className="form-control" required></input>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label sayem-title-black">Şifre</label>
-                                    <input name="password" type="password" className="form-control"></input>
+                                    <input name="password" type="password" className="form-control" required></input>
                                 </div>
 
                                 <div className="d-grid gap-2">
                                     <button className="btn btn-primary sayem-primary-button" type="submit">Giriş</button>
                                 </div>
-                            </form>
+                            </form >
                         </div>
                     </div>
                 </div>

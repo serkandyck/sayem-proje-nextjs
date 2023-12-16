@@ -11,7 +11,7 @@ export default function DropdownComp({name}) {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Talep Listesi</Dropdown.Item>
+        <Dropdown.Item href="/requests">Talep Listesi</Dropdown.Item>
         <Dropdown.Item href="#" onClick={() => {
         signOut();
       }}>Çıkış yap</Dropdown.Item>
